@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="always" name="referrer">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no,maximum-scale=1">
+    <title>music player with lrc</title>
+    <meta name="description" content="music player with lrc">
+    <meta name="keywords" content="music,player,with,lrc,js,html,css">
+    <link rel="stylesheet" type="text/css" href="/dist/css/app.css">
+    <style>
+      .view-on-github {
+        position: fixed;
+        top: 0;
+        right: 0;
+        transform: rotate(45deg) translate(30%);
+        width: 150px;
+        text-align: center;
+        background-color: #5badf0;
+        color: #fff;
+      }
+      .mt50 {
+        margin-top: 50px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!--[if lte IE 9]><p class="browser-tips">你正在使用一个<strong>过时</strong>的浏览器。请<a href="http://browsehappy.com" target="_blank">升级你的浏览器</a>以查看本页面。</p><![endif]-->
+    
+    <div id="example">
+      <div class="spinner mt50">
+        <div class="bounce"></div>
+        <div class="bounce"></div>
+        <div class="bounce"></div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function() {
+        aiPlayer.init({
+          el: '#example',
+          title: '无敌',
+          description: '测试的音乐',
+          audioSrc: '/examples/media/wudi.mp3',
+          lrcSrc: '/examples/media/wudi.lrc',
+          poster: '/examples/media/wudi.jpg'
+        });
+      }, false);
+    </script>
+
+    <a class="view-on-github" href="https://github.com/anchengjian/aiPlayer">view on github</a>
+    
+    <script type="text/javascript" src="/dist/js/app.js"></script>
+    
+  </body>
+
+</html>

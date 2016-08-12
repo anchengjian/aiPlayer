@@ -1,0 +1,89 @@
+$btn-size: 35px;
+$icon-size: 20px;
+$box-m: 10px;
+.ai-player-ctrl {
+  display: block;
+  padding: $box-m 0;
+  .ai-player-prev, .ai-player-play, .ai-player-next {
+    position: relative;
+    display: inline-block;
+    width: $btn-size;
+    height: $btn-size;
+    outline: none;
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+    font-size: 0;
+    text-align: center;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  .ai-player-prev {
+    &::before {
+      content: '';
+      display: inline-block;
+      width: $icon-size/5;
+      height: $icon-size;
+      border-radius: $icon-size/10;
+      background-color: $blue;
+    }
+    &::after {
+      content: '';
+      display: inline-block;
+      width: 0;
+      height: $icon-size;
+      border-top: $icon-size/2 solid transparent;
+      border-left: 0;
+      border-bottom: $icon-size/2 solid transparent;
+      border-right: $icon-size/2 solid $blue;
+    }
+  }
+  .ai-player-play {
+    &::before {
+      content: '';
+      display: inline-block;
+      width: $icon-size/2;
+      height: $icon-size;
+      border-right: $icon-size/5 solid $blue;
+      border-left: $icon-size/5 solid $blue;
+    }
+    &.ai-player-pause{
+      &::before {
+        content: '';
+        display: inline-block;
+        width: 0;
+        height: $icon-size;
+        border-top: $icon-size/2 solid transparent;
+        border-right: 0;
+        border-bottom: $icon-size/2 solid transparent;
+        border-left: $icon-size/2 solid $blue;
+      }
+    }
+  }
+  .ai-player-next {
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 0;
+      height: $icon-size;
+      border-top: $icon-size/2 solid transparent;
+      border-right: 0;
+      border-bottom: $icon-size/2 solid transparent;
+      border-left: $icon-size/2 solid $blue;
+    }
+    &::after {
+      content: '';
+      display: inline-block;
+      width: $icon-size/5;
+      height: $icon-size;
+      border-radius: $icon-size/10;
+      background-color: $blue;
+    }
+  }
+  .ai-player-range {
+    background-color: $blank;
+    cursor: pointer;
+  }
+}

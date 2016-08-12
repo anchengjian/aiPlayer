@@ -1,0 +1,11 @@
+$box-m: 10px;
+
+.ai-player-info {
+  padding: $box-m 0;
+  >.ai-title {
+    font-size: $t-xxxl;
+  }
+  >.ai-description{
+    font-size: $t-m;
+  }
+}
