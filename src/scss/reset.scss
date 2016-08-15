@@ -36,3 +36,22 @@ a {
   background: #d6edff;
   text-shadow: none;
 }
+
+// webkit reset scrollbar
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}

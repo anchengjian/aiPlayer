@@ -1,16 +1,32 @@
 import _ from './lib.js';
 
 class Player {
-  constructor() {
-
+  constructor(opt) {
+    this.init(opt);
   }
   init(opt) {
     if (!opt || !opt.audioSrc) return;
     this.cfg = opt;
 
+    this.createDom();
+    this.cacheDom();
+
+    // load lrc
+    if (opt.lrcSrc) {
+      this.getLrc(opt.lrcSrc, this.lrcReady.bind(this));
+      _.showLoading(this.lrcList);
+    }
+
+    this.reset();
+
+    this.setLrcListHeight();
+
+    this.initEvents();
+  }
+  createDom() {
     // select dom
-    if (opt.el) {
-      let ele = _.$(opt.el);
+    if (this.cfg.el) {
+      let ele = _.$(this.cfg.el);
       if (ele.tagName === 'SCRIPT') ele = ele.parentNode.insertBefore(document.createElement('div'), ele);
       this.ele = ele;
     } else {
@@ -21,10 +37,10 @@ class Player {
     this.ele.classList.add('ai-player-container');
 
     // dom elements
-    let str = `<div class="player-bg" style="background-image: url('${opt.poster}');"></div>
+    let str = `<div class="player-bg" style="background-image: url('${this.cfg.poster}');"></div>
       <section class="ai-player-info">
-				<h2 class="ai-title">${opt.title}</h2>
-				<p class="ai-description">${opt.description}</p>
+        <h2 class="ai-title">${this.cfg.title}</h2>
+        <p class="ai-description">${this.cfg.description}</p>
       </section>
       <section class="ai-player-lrc">
         <ul class="lrc-list"></ul>
@@ -34,9 +50,10 @@ class Player {
         <button type="button" class="ai-player-play ai-player-pause">play/pause</button>
         <button type="button" class="ai-player-next">next</button>
       </section>
-      <audio preload src="${opt.audioSrc}"></audio>`;
+      <audio preload src="${this.cfg.audioSrc}"></audio>`;
     this.ele.innerHTML = str;
-
+  }
+  cacheDom() {
     // audio elements and load audio
     this.audio = this.ele.querySelector('audio');
 
@@ -47,14 +64,15 @@ class Player {
 
     // lrcList elements
     this.lrcList = this.ele.querySelector('.lrc-list');
-    // load lrc
-    if (opt.lrcSrc) {
-      this.getLrc(opt.lrcSrc, this.ready.bind(this));
-      _.showLoading(this.lrcList);
-    }
-
-    this.reset();
-
+  }
+  setLrcListHeight() {
+    // set lrcList height
+    let hei1 = this.ele.clientHeight;
+    let hei2 = this.ele.querySelector('.ai-player-info').clientHeight;
+    let hei3 = this.ele.querySelector('.ai-player-ctrl').clientHeight;
+    this.lrcList.style.height = hei1 - hei2 - hei3 + 'px';
+  }
+  initEvents() {
     // audio load
     // this.audio.addEventListener('canplay', (e) => console.log(e), false);
     this.playEle.addEventListener('click', (e) => {
@@ -76,7 +94,7 @@ class Player {
       }
     });
   }
-  ready(data) {
+  lrcReady(data) {
     this.original = { rc: data };
 
     // parse lrc
